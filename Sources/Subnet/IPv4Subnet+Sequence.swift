@@ -9,8 +9,8 @@ extension IPv4Subnet: Sequence {
         private let lastAddressInteger: UInt32
 
         init(_ subnet: IPv4Subnet) {
-            self.currentAddressInteger = subnet.networkAddress.intValue
-            self.lastAddressInteger = subnet.broadcastAddress.intValue
+            self.currentAddressInteger = subnet.firstHost.intValue
+            self.lastAddressInteger = subnet.lastHost.intValue
         }
 
         public mutating func next() -> IPv4Address? {
