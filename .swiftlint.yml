@@ -17,7 +17,6 @@ opt_in_rules:
 - fatal_error_message
 - file_name
 - first_where
-- force_unwrapping
 - function_default_parameter_at_end
 - identical_operands
 - implicit_return
@@ -86,6 +85,9 @@ function_body_length:
 closure_body_length:
   warning: 30
   error: 30
+
+nesting:
+  type_level: 2
 
 cyclomatic_complexity:
   ignores_case_statements: true
