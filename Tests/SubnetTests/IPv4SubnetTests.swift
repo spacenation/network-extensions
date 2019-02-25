@@ -16,6 +16,6 @@ class IPv4SubnetTests: XCTestCase {
     func testIterator() {
         let subnet = IPv4Subnet(host: IPv4Address("192.168.0.1")!, mask: IPv4Address("255.255.255.0")!.intValue)
         let hostAddresses = Array(subnet)
-        XCTAssert(hostAddresses.count == 255)
+        XCTAssert(hostAddresses.count == 256)
     }
 }

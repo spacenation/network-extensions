@@ -45,10 +45,10 @@ extension IPv4Subnet {
         guard getifaddrs(&interfaceAddress) == 0 else { return nil }
         guard let firstAddress = interfaceAddress else { return nil }
 
-        for interfacePointer in sequence(first: firstAddress, next: { $0.pointee.ifa_next }) {
+        sequence(first: firstAddress, next: { $0.pointee.ifa_next }).forEach { interfacePointer in
             let interface = interfacePointer.pointee
-            guard interface.ifa_addr.pointee.sa_family == UInt8(AF_INET) else { continue }
-            guard String(cString: interface.ifa_name) == networkInterface.name else { continue }
+            guard interface.ifa_addr.pointee.sa_family == UInt8(AF_INET) else { return }
+            guard String(cString: interface.ifa_name) == networkInterface.name else { return }
 
             var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
             getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)

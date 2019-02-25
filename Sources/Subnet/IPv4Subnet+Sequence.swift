@@ -14,7 +14,7 @@ extension IPv4Subnet: Sequence {
         }
 
         public mutating func next() -> IPv4Address? {
-            guard currentAddressInteger + 1 <= lastAddressInteger else { return nil }
+            guard currentAddressInteger <= lastAddressInteger else { return nil }
             let nextAddressInteger = currentAddressInteger
             currentAddressInteger += 1
             return IPv4Address(nextAddressInteger)
