@@ -1,6 +1,6 @@
 import Foundation
-import Subnet
 import Network
+import Subnet
 
 let path = NWPathMonitor()
 

@@ -2,7 +2,6 @@ import Foundation
 import Network
 
 extension IPv4Address {
-
     public init(_ integer: UInt32) {
         self.init(withUnsafeBytes(of: UInt32(bigEndian: integer)) { Data($0) })!
     }
@@ -13,18 +12,18 @@ extension IPv4Address {
 
     public var stringValue: String {
         let integerValue = self.intValue
-        let octet1 = UInt8((integerValue>>24) & 0xff)
-        let octet2 = UInt8((integerValue>>16) & 0xff)
-        let octet3 = UInt8((integerValue>>8) & 0xff)
+        let octet1 = UInt8((integerValue >> 24) & 0xff)
+        let octet2 = UInt8((integerValue >> 16) & 0xff)
+        let octet3 = UInt8((integerValue >> 8) & 0xff)
         let octet4 = UInt8(integerValue & 0xff)
         return "\(octet1).\(octet2).\(octet3).\(octet4)"
     }
 
     var binaryStringValue: String {
         let integerValue = self.intValue
-        let octet1 = String(UInt8((integerValue>>24) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
-        let octet2 = String(UInt8((integerValue>>16) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
-        let octet3 = String(UInt8((integerValue>>8) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
+        let octet1 = String(UInt8((integerValue >> 24) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
+        let octet2 = String(UInt8((integerValue >> 16) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
+        let octet3 = String(UInt8((integerValue >> 8) & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
         let octet4 = String(UInt8(integerValue & 0xff), radix: 2).leftPadding(toLength: 8, withPad: "0")
         return "\(octet1).\(octet2).\(octet3).\(octet4)"
     }
