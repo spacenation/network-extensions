@@ -1,15 +1,16 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.1
 import PackageDescription
 
 let package = Package(
-    name: "Subnet",
+    name: "NetworkExtensions",
+    platforms: [
+        .iOS(.v12), .macOS(.v10_14)
+    ],
     products: [
-        .executable(name: "subnet", targets: ["subnet-cli", "Subnet"]),
-        .library(name: "Subnet", type: .static, targets: ["Subnet"])
+        .library(name: "NetworkExtensions", type: .static, targets: ["NetworkExtensions"])
     ],
     targets: [
-        .target(name: "subnet-cli", dependencies: ["Subnet"]),
-        .target(name: "Subnet"),
-        .testTarget(name: "SubnetTests", dependencies: ["Subnet"])
+        .target(name: "NetworkExtensions"),
+        .testTarget(name: "NetworkExtensionsTests", dependencies: ["NetworkExtensions"])
     ]
 )

@@ -1,5 +1,5 @@
 import Network
-import Subnet
+import NetworkExtensions
 import XCTest
 
 class IPV4AddressTests: XCTestCase {
