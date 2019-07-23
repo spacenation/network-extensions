@@ -5,17 +5,17 @@ extension IPv4Subnet {
     public func scanHTTPHostsWithURL(path: String?, dataMatching: @escaping (String) -> Bool = { _ in true }, limit: Int = 256, completionHandler: @escaping ([String]) -> Void) {
         DispatchQueue(label: "subnet.scan").async {
             var mathchingHosts: [String] = []
-            var remainingHosts: Set<String> = Set(self.map { $0.stringValue }.prefix(limit))
+            var remainingHosts: Set<String> = Set(self.map { $0.ipString }.prefix(limit))
 
             self.prefix(limit).forEach { address in
                 let urlString: String
                 if let path = path {
-                    urlString = "http://\(address.stringValue)/\(path)"
+                    urlString = "http://\(address.ipString)/\(path)"
                 } else {
-                    urlString = "http://\(address.stringValue)"
+                    urlString = "http://\(address.ipString)"
                 }
                 guard let url = URL(string: urlString) else {
-                    remainingHosts.remove(address.stringValue)
+                    remainingHosts.remove(address.ipString)
                     return
                 }
 
@@ -23,10 +23,10 @@ extension IPv4Subnet {
                 let task = URLSession.shared.dataTask(with: request) { data, _, _ in
                     if let data = data, let dataString = String(data: data, encoding: .utf8) {
                         if dataMatching(dataString) {
-                            mathchingHosts.append(address.stringValue)
+                            mathchingHosts.append(address.ipString)
                         }
                     }
-                    remainingHosts.remove(address.stringValue)
+                    remainingHosts.remove(address.ipString)
                 }
                 task.resume()
             }
