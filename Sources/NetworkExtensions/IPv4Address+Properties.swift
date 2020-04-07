@@ -68,7 +68,7 @@ public extension String {
     }
 
     var IPv4AddressInteger: UInt32 {
-        return self.components(separatedBy: ".").compactMap({ Int($0) }).reduce(UInt32(0)) { $0 << 8 + UInt32($1) }
+        return self.components(separatedBy: ".").compactMap({ UInt8($0) }).reduce(UInt32(0)) { $0 << 8 + UInt32($1) }
     }
 
     var prefixLenght: Int {
